@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.deloitte.spring.boot.project.model.Election;
+import com.deloitte.spring.boot.project.model.ElectionParty;
 
 
 @ControllerAdvice
@@ -17,6 +18,14 @@ public class GlobalExceptionHandler {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("message", e.getMessage());
 		ResponseEntity<Election> response = new ResponseEntity<>(null, headers, HttpStatus.NOT_FOUND);
+		return response;
+	}
+	
+	@ExceptionHandler(ElectionPartyNotFoundException.class)
+	public ResponseEntity<ElectionParty> handleEElectionPartyNotFoundException(ElectionPartyNotFoundException e) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("message", e.getMessage());
+		ResponseEntity<ElectionParty> response = new ResponseEntity<>(null, headers, HttpStatus.NOT_FOUND);
 		return response;
 	}
 }
